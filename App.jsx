@@ -251,7 +251,7 @@ const App = () => {
   OneSignal.Debug.setLogLevel(LogLevel.Verbose);
 
   // OneSignal ініціалізація
-  OneSignal.initialize('8771eacc-5c80-484a-b202-626eb3385726');
+  OneSignal.initialize('fa024767-fe31-499c-ba76-408297e7dbcb');
   //OneSignal.Debug.setLogLevel(OneSignal.LogLevel.Verbose);
 
   // Встановлюємо цей ID як OneSignal External ID
@@ -467,7 +467,30 @@ const App = () => {
   return (
     <NavigationContainer>
       <ContextProvider>
-        {!isLoading ? <SonnenSpielMergurLoader /> : <Route isFatch={route} />}
+        {!isLoading ? (
+        <View style={{ flex: 1, overflow: 'hidden' }}>
+          {/* Контейнер шириною у 2 * screenWidth: два зображення поруч */}
+          <Animated.View
+            style={{
+              flexDirection: 'row',
+              width: screenWidth * 2,
+              height: '100%',
+              transform: [{ translateX: slideAnim }],
+            }}
+          >
+            <Image
+              style={{ width: screenWidth, height: '100%' }}
+              source={require('./assets/images/1.jpg')}
+              resizeMode="cover"
+            />
+            <Image
+              style={{ width: screenWidth, height: '100%' }}
+              source={require('./assets/images/2.jpg')}
+              resizeMode="cover"
+            />
+          </Animated.View>
+        </View>
+        ) : <Route isFatch={route} />}
       </ContextProvider>
     </NavigationContainer>
   );
